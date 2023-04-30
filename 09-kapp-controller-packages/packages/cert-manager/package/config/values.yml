@@ -1,0 +1,9 @@
+#@data/values-schema
+---
+
+#@schema/desc "Number of replicas for the cert-manager Deployment."
+replicas: 1
+
+#@schema/desc "Name of the private CA."
+#@schema/validation min_len=1
+private_ca_name: kadras-ca-issuer

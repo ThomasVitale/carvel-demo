@@ -1,0 +1,44 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: cert-manager.packages.thomasvitale.com.1.11.1
+spec:
+  licenses:
+  - Apache 2.0
+  refName: cert-manager.packages.thomasvitale.com
+  releaseNotes: https://github.com/kadras-io/package-for-cert-manager/releases
+  releasedAt: "2023-04-30T15:05:36Z"
+  template:
+    spec:
+      deploy:
+      - kapp:
+          rawOptions:
+          - --wait-timeout=5m
+          - --kube-api-qps=50
+          - --kube-api-burst=100
+      fetch:
+      - imgpkgBundle:
+          image: ghcr.io/thomasvitale/package-for-cert-manager@sha256:d9ce4d1a1dd66b96e4623f5b5dcc78feadc77ba92730e76a62be2bbd21d24d2a
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+  valuesSchema:
+    openAPIv3:
+      additionalProperties: false
+      properties:
+        private_ca_name:
+          default: kadras-ca-issuer
+          description: Name of the private CA.
+          type: string
+        replicas:
+          default: 1
+          description: Number of replicas for the cert-manager Deployment.
+          type: integer
+      type: object
+  version: 1.11.1

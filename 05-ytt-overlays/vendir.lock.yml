@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Bump version to 2.6.7
+      sha: 5bcd846fa16e4b19d8f477de7da50ec0aef320e5
+      tags:
+      - stable
+    path: .
+  path: config/upstream
+kind: LockConfig

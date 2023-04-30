@@ -1,0 +1,71 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: cert-manager.packages.thomasvitale.com.0.0.0
+spec:
+  licenses:
+  - Apache 2.0
+  refName: cert-manager.packages.thomasvitale.com
+  releaseNotes: https://github.com/kadras-io/package-for-cert-manager/releases
+  releasedAt: null
+  template:
+    spec:
+      deploy:
+      - kapp:
+          rawOptions:
+          - --wait-timeout=5m
+          - --kube-api-qps=50
+          - --kube-api-burst=100
+      fetch:
+      - git: {}
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld: {}
+  valuesSchema:
+    openAPIv3: {}
+  version: 0.0.0
+
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  creationTimestamp: null
+  name: cert-manager.packages.thomasvitale.com
+spec:
+  categories:
+  - certificate-management
+  - security
+  - tls
+  displayName: cert-manager
+  longDescription: Extensible X.509 certificate controller for Kubernetes. It will
+    obtain certificates from a variety of Issuers, both popular public Issuers as
+    well as private Issuers, and ensure the certificates are valid and up-to-date,
+    and will attempt to renew certificates at a configured time before expiry.
+  maintainers:
+  - name: Thomas Vitale
+  providerName: Kadras
+  shortDescription: X.509 certificate management for Kubernetes and OpenShift.
+  supportDescription: Go to https://kadras.io for documentation and https://github.com/kadras-io/package-for-cert-manager
+    for community support.
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kctrl.carvel.dev/local-fetch-0: .
+  creationTimestamp: null
+  name: cert-manager
+spec:
+  packageRef:
+    refName: cert-manager.packages.thomasvitale.com
+    versionSelection:
+      constraints: 0.0.0
+  serviceAccountName: kadras-install-sa
+status:
+  conditions: null
+  friendlyDescription: ""
+  observedGeneration: 0

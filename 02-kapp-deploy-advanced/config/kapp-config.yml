@@ -1,0 +1,18 @@
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+
+#! Rebase rules explicitly define how kapp should merge resources during an update.
+#! See more about the resource merge method: https://carvel.dev/kapp/docs/latest/merge-method.
+rebaseRules:
+
+#! This Secret is created empty and populated by Argo CD with credentials, tokens and TLS certificates.
+#! We want to maintain those values but also accept new changes to the 'data' path.
+- path: [data]
+  type: copy
+  sources: [new, existing]
+  resourceMatchers:
+  - kindNamespaceNameMatcher:
+      kind: Secret
+      namespace: argocd
+      name: argocd-secret

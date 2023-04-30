@@ -1,0 +1,7 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.37.0
+overrides:
+- image: cgr.dev/chainguard/fluent-bit:2.1
+  newImage: cgr.dev/chainguard/fluent-bit@sha256:04502d28eab6f224052db50976ab285ff5198b93dd7c8df0d7fc48479f96602e
+  preresolved: true

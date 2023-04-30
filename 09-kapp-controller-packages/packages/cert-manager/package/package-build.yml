@@ -1,0 +1,29 @@
+apiVersion: kctrl.carvel.dev/v1alpha1
+kind: PackageBuild
+metadata:
+  creationTimestamp: null
+  name: cert-manager.packages.thomasvitale.com
+spec:
+  release:
+  - resource: {}
+  template:
+    spec:
+      app:
+        spec:
+          deploy:
+          - kapp:
+              rawOptions:
+              - --wait-timeout=5m
+              - --kube-api-qps=50
+              - --kube-api-burst=100
+          template:
+          - ytt:
+              paths:
+              - config
+          - kbld: {}
+      export:
+      - imgpkgBundle:
+          image: ghcr.io/thomasvitale/package-for-cert-manager
+          useKbldImagesLock: true
+        includePaths:
+        - config

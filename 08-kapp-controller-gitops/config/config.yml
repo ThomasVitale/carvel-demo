@@ -1,0 +1,23 @@
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: simple-app
+  namespace: default
+spec:
+  serviceAccountName: default-ns-sa
+  fetch:
+  - git:
+      url: https://github.com/k14s/k8s-simple-app-example
+      ref: origin/develop
+      subPath: config-step-2-template
+  template:
+  - ytt:
+      inline:
+        paths:
+          values.yaml: |
+            #@data/values
+            ---
+            hello_msg: folks 
+  deploy:
+  - kapp: {}

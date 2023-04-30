@@ -1,0 +1,6 @@
+#@data/values-schema
+---
+
+#@schema/desc "The service type for the ArgoCD Server."
+#@schema/validation one_of=["ClusterIP", "LoadBalancer", "NodePort"]
+service_type: ClusterIP

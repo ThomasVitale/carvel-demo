@@ -1,0 +1,9 @@
+#@data/values-schema
+---
+
+#@schema/desc "The port exposed by the app service."
+service_port: 80
+
+#@schema/desc "The message printed by the app."
+#@schema/validation min_len=1
+hello_msg: stranger

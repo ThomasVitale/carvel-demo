@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      ref: v2.6.7
+      url: https://github.com/argoproj/argo-cd
+    includePaths:
+    - manifests/install.yaml
+    newRootPath: manifests
+    path: .
+  path: config/upstream
+kind: Config

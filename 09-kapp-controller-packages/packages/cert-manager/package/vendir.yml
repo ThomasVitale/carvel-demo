@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - githubRelease:
+      disableAutoChecksumValidation: true
+      slug: cert-manager/cert-manager
+      tag: v1.11.1
+    includePaths:
+    - cert-manager.yaml
+    path: .
+  path: config/upstream
+kind: Config
+minimumRequiredVersion: 0.32.0
